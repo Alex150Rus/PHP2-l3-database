@@ -3,6 +3,7 @@
 include ('../services/Autoloader.php');
 include ('../config/main.php');
 use app\services\Autoloader;
+use app\services\Db;
 use app\models\Product;
 use app\models\User;
 
@@ -17,6 +18,8 @@ $user = new User();
 $user ->getOne(5);
 $user ->getAll();
 
+$db = new Db();
+var_dump($db->getConnection()); exit;
 
 /**
  * Created by PhpStorm.

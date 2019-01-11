@@ -20,7 +20,6 @@ class Autoloader
 
     if (file_exists($className)) {
       include $className;
-      var_dump($className);
     }
   }
 }

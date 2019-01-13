@@ -13,4 +13,5 @@ interface IDb
 {
   function queryOne(string $sql, array $params = []);
   function queryAll(string $sql, array $params = []);
+  function execute (string $sql, array $params = []);
 }

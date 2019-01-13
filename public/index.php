@@ -3,23 +3,12 @@
 include ('../services/Autoloader.php');
 include ('../config/main.php');
 use app\services\Autoloader;
-use app\services\Db;
 use app\models\Product;
-use app\models\User;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
 $product = new Product();
-$product ->IamHere();
-$product ->getOne(1);
-$product ->getAll();
-
-$user = new User();
-$user ->getOne(5);
-$user ->getAll();
-
-$db = new Db();
-var_dump($db->getConnection()); exit;
+var_dump($product ->getOne(4));
 
 /**
  * Created by PhpStorm.

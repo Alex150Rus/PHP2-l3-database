@@ -16,10 +16,6 @@ class Product extends Model
   public $price;
   public $vendor_id;
 
-  public function IamHere() {
-    echo "Hello, I am Product and I am here";
-  }
-
   public function getTableName(): string
   {
     return 'products';

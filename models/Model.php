@@ -25,6 +25,9 @@ abstract class Model implements IModel
   function getOne(int $id)
   {
     $tableName = $this->getTableName();
+
+    /* id = :id - :-плэйсхолдер, id - имя. Вместо него подстановится значение. Защита от sql инъекции, так как нельзя модифицировать
+    sql запрос */
     $sql = "SELECT * FROM {$tableName} WHERE id = :id";
     return $this->db->queryOne($sql, [":id" => $id]);
   }

@@ -26,8 +26,10 @@ class Db implements IDb
     'charset' => 'utf8',
   ];
 
+  //хранится соединение
   private $conn = null;
 
+  // 1)создаётся соединение через объект PDO и используется метод отложенной инициализации
   private function getConnection()
   {
     if (is_null($this->conn)) {
@@ -36,28 +38,42 @@ class Db implements IDb
         $this->config['login'],
         $this->config['password']
       );
+
+      /*PDO можно настроить на разные режимы работы. В частности, на режим фетча, указав ему вид получения данных -
+      ассоциативный массив,например,: PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC
+      setAttribute устанавливает параметры PDO - предопределённые константы внутри класса PDO
+      певый аргумент - параметр, второй - его значение*/
       $this->conn->setAttribute(\PDO::ATTR_DEFAULT_FETCH_MODE, \PDO::FETCH_ASSOC);
     }
     return $this->conn;
   }
 
+  // 2) метод получения доступа к соединению и выполения запроса
   private function query(string $sql, array $params = [])
   {
+    // метод prepare вернёт объект, содержащий данные о готовящемся запросе
     $pdoStatement = $this->getConnection()->prepare($sql);
+
+    /* execute выполняет запрос и привязывает значения, но он недостаточен для запросов, в которых нужно получить данные
+    (Read)ниже мы для этого используем fetchAll()*/
     $pdoStatement->execute($params);
     return $pdoStatement;
   }
 
+  // 3) метод извлечения результата
   public function queryOne(string $sql, array $params = [])
   {
     return $this->queryAll($sql, $params)[0];
   }
 
+  // 3) метод извлечения результата
   public function queryAll(string $sql, array $params = [])
   {
+    // в fetchAll() мы можем указать тип данных, в котором хотим получить результат
     return $this->query($sql, $params)->fetchAll();
   }
 
+  // 3) метод извлечения результата для запросов без выборки: update, insert, delete
   public function execute(string $sql, array $params = [])
   {
     $this->query($sql, $params);

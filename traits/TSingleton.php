@@ -11,20 +11,22 @@ namespace app\traits;
 
 trait TSingleton
 {
+  //здесь хранится единственный экземпляр объекта
   private static $instance = null;
 
-  private function __construct()
-  {
-  }
+  /* приватный метод конструктор нигде нельзя использовать, т.е. нельзя будет создать от него объект: new Db() или
+  другие экземпляры класса, в которых будет использоваться этот синглтон. Но нам нужен 1 объект и мы можем создать
+   его внутри класса! - см ниже getInstance */
+  private function __construct(){}
 
-  private function __clone()
-  {
-  }
+  //используется при клонировании объекта
+  private function __clone(){}
 
-  private function __wakeup()
-  {
-  }
+  //используется при восстановлении объекта из сериализованных данных
+  private function __wakeup(){}
 
+  // метод отложенной инициализации для возврата объекта, созданного в классе. Теперь везде будем получать один и тот же
+  // оьъект
   public static function getInstance()
   {
     if (is_null(static::$instance)) {

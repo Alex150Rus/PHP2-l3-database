@@ -61,22 +61,23 @@ class Db implements IDb
   }
 
   // 3) метод извлечения результата
-  public function queryOne(string $sql, array $params = [])
+  public function queryOne(string $sql, $class, array $params = [])
   {
-    return $this->queryAll($sql, $params)[0];
+    return $this->queryAll($sql, $class, $params)[0];
   }
 
   // 3) метод извлечения результата
-  public function queryAll(string $sql, array $params = [])
+  public function queryAll(string $sql, $class, array $params = [])
   {
-    // в fetchAll() мы можем указать тип данных, в котором хотим получить результат
-    return $this->query($sql, $params)->fetchAll();
+    // в fetchAll() мы можем указать тип данных, в котором хотим получить результат - массив объектов?
+    return $this->query($sql, $params)->fetchAll(\PDO::FETCH_CLASS, $class);
   }
 
   // 3) метод извлечения результата для запросов без выборки: update, insert, delete
   public function execute(string $sql, array $params = [])
   {
     $this->query($sql, $params);
+    var_dump($this->query($sql, $params));
     return true;
   }
 
@@ -89,5 +90,4 @@ class Db implements IDb
       $this->config['charset']
     );
   }
-
 }

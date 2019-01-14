@@ -11,7 +11,7 @@ namespace app\interfaces;
 
 interface IDb
 {
-  function queryOne(string $sql, array $params = []);
-  function queryAll(string $sql, array $params = []);
+  function queryOne(string $sql, $class, array $params = []);
+  function queryAll(string $sql, $class, array $params = []);
   function execute (string $sql, array $params = []);
 }

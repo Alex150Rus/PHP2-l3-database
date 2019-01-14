@@ -20,4 +20,10 @@ class User extends Model
  {
   return 'users';
  }
+
+  public function getClassName()
+  {
+    return '\app\models\User';
+  }
+
 }

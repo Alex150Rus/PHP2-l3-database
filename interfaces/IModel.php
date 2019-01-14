@@ -16,4 +16,6 @@ interface IModel
   function getAll();
 
   function getTableName();
+
+  function getClassName();
 }

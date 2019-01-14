@@ -7,8 +7,11 @@ use app\models\Product;
 
 spl_autoload_register([new Autoloader(), 'loadClass']);
 
-$product = new Product();
-var_dump($product ->getOne(4));
+$product1 = new Product();
+var_dump($product2 = $product1 ->getOne(5));
+var_dump($product1);
+$product2->insert();
+var_dump($product2->update());
 
 /**
  * Created by PhpStorm.

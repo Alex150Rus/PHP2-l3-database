@@ -16,8 +16,14 @@ class Product extends Model
   public $price;
   public $vendor_id;
 
-  public function getTableName(): string
+   public function getTableName(): string
   {
     return 'products';
   }
+
+  public function getClassName()
+  {
+    return '\app\models\Product';
+  }
+
 }
